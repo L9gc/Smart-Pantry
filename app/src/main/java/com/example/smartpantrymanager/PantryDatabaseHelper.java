@@ -196,6 +196,18 @@ public class PantryDatabaseHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
+    // Delete all ingredients from the pantry.
+    public int clearPantry() {
+        SQLiteDatabase db = getWritableDatabase();
+
+        return db.delete(
+                TABLE_INGREDIENTS,
+                null,
+                null
+        );
+    }
+
+
 
     // ---------------------------------------------------------
     // RECIPE OPERATIONS

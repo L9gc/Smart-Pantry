@@ -86,7 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Load the saved preference without triggering the listener.
         boolean alertsEnabled = preferences.getBoolean(
                 "expiry_alerts_enabled",
-                true
+                false
         );
 
         expiryAlertsSwitch.setChecked(alertsEnabled);
@@ -151,31 +151,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void clearPantry() {
-
-        Cursor cursor = databaseHelper.getAllIngredients();
-        int deletedCount = 0;
-
-        if (cursor != null) {
-
-            try {
-
-                int idColumn =
-                        cursor.getColumnIndexOrThrow("id");
-
-                while (cursor.moveToNext()) {
-
-                    int ingredientId =
-                            cursor.getInt(idColumn);
-
-                    if (databaseHelper.deleteIngredient(ingredientId)) {
-                        deletedCount++;
-                    }
-                }
-
-            } finally {
-                cursor.close();
-            }
-        }
+        int deletedCount = databaseHelper.clearPantry();
 
         Toast.makeText(
                 this,
@@ -185,6 +161,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT
         ).show();
     }
+
 
     // Bottom navigation methods.
 
