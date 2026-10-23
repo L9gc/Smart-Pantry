@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#F5F7F2">
+    android:background="#FFF8F1">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,18 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="22dp">
+            android:padding="24dp">
 
             <!-- Back button -->
             <TextView
                 android:id="@+id/btnBackToRecipes"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="←  Back to recipes"
-                android:textColor="#246B52"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:text="‹  Back to recipes"
+                android:textColor="#8E432B"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:padding="8dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="12dp"
                 android:clickable="true"
                 android:focusable="true" />
 
@@ -35,9 +38,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="18dp"
                 android:text="YOUR NEXT MEAL"
-                android:textColor="#39856A"
+                android:textColor="#8E432B"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.08" />
@@ -49,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Recipe name"
-                android:textColor="#20352D"
+                android:textColor="#3D3029"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -58,55 +61,64 @@
                 android:id="@+id/txtDetailRecipeTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:background="#C8E8D6"
+                android:background="#F6D7C3"
                 android:text="15 minutes"
-                android:textColor="#246B52"
+                android:textColor="#8E432B"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <!-- Description card -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:orientation="vertical"
-                android:padding="20dp"
-                android:background="#246B52"
-                android:elevation="3dp">
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ABOUT THIS RECIPE"
-                    android:textColor="#C8E8D6"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.08" />
-
-                <TextView
-                    android:id="@+id/txtDetailRecipeDescription"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Recipe description"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp"
-                    android:lineSpacingExtra="4dp" />
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ABOUT THIS RECIPE"
+                        android:textColor="#8E432B"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.08" />
+
+                    <TextView
+                        android:id="@+id/txtDetailRecipeDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Recipe description"
+                        android:textColor="#87766B"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <!-- Ingredients heading -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="28dp"
                 android:text="Ingredients"
-                android:textColor="#20352D"
+                android:textColor="#3D3029"
                 android:textSize="23sp"
                 android:textStyle="bold" />
 
@@ -115,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Everything you need to prepare this meal."
-                android:textColor="#68766E"
+                android:textColor="#87766B"
                 android:textSize="14sp" />
 
             <!-- Ingredients list -->
@@ -130,9 +142,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="28dp"
                 android:text="Cooking instructions"
-                android:textColor="#20352D"
+                android:textColor="#3D3029"
                 android:textSize="23sp"
                 android:textStyle="bold" />
 
@@ -141,21 +153,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Follow these steps to prepare your meal."
-                android:textColor="#68766E"
+                android:textColor="#87766B"
                 android:textSize="14sp" />
 
-            <!-- Recipe instructions -->
-            <TextView
-                android:id="@+id/txtDetailRecipeInstructions"
+            <!-- Recipe instructions card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:padding="20dp"
-                android:background="#FFFFFF"
-                android:text="Cooking instructions will appear here."
-                android:textColor="#20352D"
-                android:textSize="15sp"
-                android:lineSpacingExtra="8dp" />
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/txtDetailRecipeInstructions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:text="Cooking instructions will appear here."
+                    android:textColor="#3D3029"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="8dp" />
+
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
@@ -171,53 +192,53 @@
         android:elevation="8dp">
 
         <TextView
+            android:id="@+id/navHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="⌂\nHome"
-            android:textColor="#849188"
+            android:textColor="#87766B"
             android:textSize="12sp"
             android:clickable="true"
-            android:focusable="true"
-            android:onClick="openHome" />
+            android:focusable="true" />
 
         <TextView
+            android:id="@+id/navPantry"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="▤\nPantry"
-            android:textColor="#849188"
+            android:textColor="#87766B"
             android:textSize="12sp"
             android:clickable="true"
-            android:focusable="true"
-            android:onClick="openPantry" />
+            android:focusable="true" />
 
         <TextView
+            android:id="@+id/navRecipes"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="⚙\nRecipes"
-            android:textColor="#246B52"
+            android:text="♨\nRecipes"
+            android:textColor="#D97745"
             android:textSize="12sp"
             android:textStyle="bold"
             android:clickable="true"
-            android:focusable="true"
-            android:onClick="openRecipes" />
+            android:focusable="true" />
 
         <TextView
+            android:id="@+id/navSettings"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="⚙\nSettings"
-            android:textColor="#849188"
+            android:textColor="#87766B"
             android:textSize="12sp"
             android:clickable="true"
-            android:focusable="true"
-            android:onClick="openSettings" />
+            android:focusable="true" />
 
     </LinearLayout>
 

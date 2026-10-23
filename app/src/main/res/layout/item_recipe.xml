@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,63 +7,76 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="14dp"
     app:cardBackgroundColor="#FFFFFF"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp">
+    app:cardCornerRadius="18dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="18dp">
 
+        <!-- Availability label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#F6D7C3"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:text="READY TO MAKE"
-            android:textColor="#39856A"
+            android:textColor="#8E432B"
             android:textSize="11sp"
             android:textStyle="bold"
-            android:letterSpacing="0.08" />
+            android:letterSpacing="0.06" />
 
+        <!-- Recipe name -->
         <TextView
             android:id="@+id/txtRecipeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:text="Recipe name"
-            android:textColor="#20352D"
+            android:textColor="#3D3029"
             android:textSize="21sp"
             android:textStyle="bold" />
 
+        <!-- Recipe description -->
         <TextView
             android:id="@+id/txtRecipeDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Recipe description"
-            android:textColor="#68766E"
+            android:textColor="#87766B"
             android:textSize="14sp"
             android:lineSpacingExtra="3dp" />
 
+        <!-- Preparation time -->
         <TextView
             android:id="@+id/txtRecipeTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="14dp"
             android:text="15 minutes"
-            android:textColor="#246B52"
+            android:textColor="#8E432B"
             android:textSize="13sp"
             android:textStyle="bold" />
 
+        <!-- View recipe button -->
         <Button
             android:id="@+id/btnViewRecipe"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="View recipe"
+            android:layout_height="50dp"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="#D97745"
+            android:text="View Recipe"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            app:backgroundTint="#246B52" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
