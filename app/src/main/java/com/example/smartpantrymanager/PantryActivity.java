@@ -40,9 +40,13 @@ public class PantryActivity extends AppCompatActivity {
 
         Button btnAddIngredient = findViewById(R.id.btnAddIngredient);
 
-        recyclerPantry.setLayoutManager(
-                new LinearLayoutManager(this)
-        );
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(this);
+
+        layoutManager.setItemPrefetchEnabled(false);
+
+        recyclerPantry.setLayoutManager(layoutManager);
+
 
         ingredientAdapter = new IngredientAdapter(
                 ingredientList,
