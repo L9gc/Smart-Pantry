@@ -1,20 +1,29 @@
 package com.example.smartpantrymanager;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private Switch expiryAlertsSwitch;
     private Button btnClearPantry;
+
+    private ActivityResultLauncher<String> notificationPermissionLauncher;
 
     private PantryDatabaseHelper databaseHelper;
     private SharedPreferences preferences;
@@ -22,11 +31,49 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Register the notification permission launcher once.
+        notificationPermissionLauncher =
+                registerForActivityResult(
+                        new ActivityResultContracts.RequestPermission(),
+                        granted -> {
+
+                            if (granted) {
+
+                                preferences.edit()
+                                        .putBoolean("expiry_alerts_enabled", true)
+                                        .apply();
+
+                                Toast.makeText(
+                                        this,
+                                        "Expiry notifications enabled.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+
+                            } else {
+
+                                expiryAlertsSwitch.setChecked(false);
+
+                                preferences.edit()
+                                        .putBoolean("expiry_alerts_enabled", false)
+                                        .apply();
+
+                                Toast.makeText(
+                                        this,
+                                        "Notification permission was not granted.",
+                                        Toast.LENGTH_LONG
+                                ).show();
+                            }
+                        }
+                );
+
         setContentView(R.layout.activity_settings);
 
+        // Connect the XML views.
         expiryAlertsSwitch = findViewById(R.id.expiryAlertsSwitch);
         btnClearPantry = findViewById(R.id.btnClearPantry);
 
+        // Initialize the database and preferences.
         databaseHelper = new PantryDatabaseHelper(this);
 
         preferences = getSharedPreferences(
@@ -34,7 +81,7 @@ public class SettingsActivity extends AppCompatActivity {
                 MODE_PRIVATE
         );
 
-        // Load the saved expiry-alert preference.
+        // Load the saved preference without triggering the listener.
         boolean alertsEnabled = preferences.getBoolean(
                 "expiry_alerts_enabled",
                 true
@@ -42,54 +89,87 @@ public class SettingsActivity extends AppCompatActivity {
 
         expiryAlertsSwitch.setChecked(alertsEnabled);
 
-        // Save changes whenever the switch is toggled.
-        expiryAlertsSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            preferences.edit()
-                    .putBoolean("expiry_alerts_enabled", isChecked)
-                    .apply();
+        // Handle changes to the expiry-alert switch.
+        expiryAlertsSwitch.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> {
 
-            String message = isChecked
-                    ? "Expiry alert preference enabled."
-                    : "Expiry alert preference disabled.";
+                    if (isChecked
+                            && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                            && ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.POST_NOTIFICATIONS
+                    ) != PackageManager.PERMISSION_GRANTED) {
 
-            Toast.makeText(
-                    SettingsActivity.this,
-                    message,
-                    Toast.LENGTH_SHORT
-            ).show();
-        });
+                        notificationPermissionLauncher.launch(
+                                Manifest.permission.POST_NOTIFICATIONS
+                        );
 
-        // Confirm before deleting pantry ingredients.
-        btnClearPantry.setOnClickListener(v -> showClearPantryDialog());
+                        return;
+                    }
+
+                    preferences.edit()
+                            .putBoolean("expiry_alerts_enabled", isChecked)
+                            .apply();
+
+                    String message = isChecked
+                            ? "Expiry alerts enabled."
+                            : "Expiry alerts disabled.";
+
+                    Toast.makeText(
+                            SettingsActivity.this,
+                            message,
+                            Toast.LENGTH_SHORT
+                    ).show();
+                }
+        );
+
+        // Handle the Clear Pantry button.
+        btnClearPantry.setOnClickListener(
+                v -> showClearPantryDialog()
+        );
     }
 
     private void showClearPantryDialog() {
+
         new AlertDialog.Builder(this)
                 .setTitle("Clear Pantry?")
                 .setMessage(
-                        "Are you sure you want to remove all ingredients " +
-                                "from your pantry? This action cannot be undone."
+                        "Are you sure you want to remove all ingredients "
+                                + "from your pantry? This action cannot be undone."
                 )
-                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                .setPositiveButton("Clear", (dialog, which) -> clearPantry())
+                .setNegativeButton(
+                        "Cancel",
+                        (dialog, which) -> dialog.dismiss()
+                )
+                .setPositiveButton(
+                        "Clear",
+                        (dialog, which) -> clearPantry()
+                )
                 .show();
     }
 
     private void clearPantry() {
+
         Cursor cursor = databaseHelper.getAllIngredients();
         int deletedCount = 0;
 
         if (cursor != null) {
+
             try {
-                int idColumn = cursor.getColumnIndexOrThrow("id");
+
+                int idColumn =
+                        cursor.getColumnIndexOrThrow("id");
 
                 while (cursor.moveToNext()) {
-                    int ingredientId = cursor.getInt(idColumn);
+
+                    int ingredientId =
+                            cursor.getInt(idColumn);
 
                     if (databaseHelper.deleteIngredient(ingredientId)) {
                         deletedCount++;
                     }
                 }
+
             } finally {
                 cursor.close();
             }
@@ -104,20 +184,32 @@ public class SettingsActivity extends AppCompatActivity {
         ).show();
     }
 
-    // Bottom navigation methods
+    // Bottom navigation methods.
 
     public void openHome(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+
+        startActivity(
+                new Intent(this, MainActivity.class)
+        );
+
         finish();
     }
 
     public void openPantry(View view) {
-        startActivity(new Intent(this, PantryActivity.class));
+
+        startActivity(
+                new Intent(this, PantryActivity.class)
+        );
+
         finish();
     }
 
     public void openRecipes(View view) {
-        startActivity(new Intent(this, SuggestedRecipesActivity.class));
+
+        startActivity(
+                new Intent(this, SuggestedRecipesActivity.class)
+        );
+
         finish();
     }
 }
