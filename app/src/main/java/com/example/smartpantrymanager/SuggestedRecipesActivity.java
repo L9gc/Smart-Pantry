@@ -47,11 +47,22 @@ public class SuggestedRecipesActivity extends AppCompatActivity
         loadSuggestedRecipes();
     }
 
+
     private void loadSuggestedRecipes() {
 
-        // The database performs the ingredient and quantity matching.
+        android.util.Log.e(
+                "RECIPE_DEBUG",
+                "loadSuggestedRecipes() WAS CALLED"
+        );
+
         List<Recipe> suggestedRecipes =
                 databaseHelper.getSuggestedRecipes();
+
+        android.util.Log.e(
+                "RECIPE_DEBUG",
+                "Number of suggestions returned: "
+                        + suggestedRecipes.size()
+        );
 
         recipeAdapter.updateRecipes(suggestedRecipes);
 

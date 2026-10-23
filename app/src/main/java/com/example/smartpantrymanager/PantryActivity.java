@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +89,9 @@ public class PantryActivity extends AppCompatActivity {
 
         Cursor cursor = databaseHelper.getAllIngredients();
 
+        android.util.Log.d("PANTRY_DEBUG",
+                "Database ingredient count: " + cursor.getCount());
+
         try {
             while (cursor.moveToNext()) {
 
@@ -127,6 +130,8 @@ public class PantryActivity extends AppCompatActivity {
         }
 
         ingredientAdapter.notifyDataSetChanged();
+        android.util.Log.d("PANTRY_DEBUG",
+                "Ingredients displayed: " + ingredientList.size());
 
         boolean isEmpty = ingredientList.isEmpty();
 

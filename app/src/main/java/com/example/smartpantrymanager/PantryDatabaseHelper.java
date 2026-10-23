@@ -342,22 +342,19 @@ public class PantryDatabaseHelper extends SQLiteOpenHelper {
     // STRICT RECIPE MATCHING
     // ---------------------------------------------------------
 
-    public List<Recipe> getSuggestedRecipes() {
 
+    public List<Recipe> getSuggestedRecipes() {
+        android.util.Log.e("RECIPE_DEBUG", "getSuggestedRecipes() WAS CALLED");
         List<Recipe> suggestions = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();
 
-        // Store pantry quantities using normalized ingredient names
         Map<String, Double> pantryQuantities = new HashMap<>();
-
-        // Track the measurement dimension for each pantry ingredient
         Map<String, String> pantryUnits = new HashMap<>();
 
         Cursor pantryCursor = getAllIngredients();
 
         try {
-
             while (pantryCursor.moveToNext()) {
 
                 String name = pantryCursor.getString(
@@ -375,18 +372,22 @@ public class PantryDatabaseHelper extends SQLiteOpenHelper {
                 String key = normalizeName(name);
                 String dimension = getDimension(unit);
 
+                android.util.Log.d("RECIPE_DEBUG",
+                        "Pantry: " + name + " | Quantity: " + quantity
+                                + " " + unit + " | Key: " + key
+                                + " | Dimension: " + dimension);
+
                 if (dimension == null) {
                     continue;
                 }
 
-                // Convert to a common base unit before comparing quantities
-                double normalizedQuantity =
-                        convertToBaseUnit(quantity, unit);
+                double normalizedQuantity = convertToBaseUnit(quantity, unit);
 
                 if (pantryUnits.containsKey(key)) {
 
-                    // Do not combine incompatible measurements
                     if (!pantryUnits.get(key).equals(dimension)) {
+                        android.util.Log.w("RECIPE_DEBUG",
+                                "Incompatible units for pantry ingredient: " + name);
                         continue;
                     }
 
@@ -396,89 +397,95 @@ public class PantryDatabaseHelper extends SQLiteOpenHelper {
                     );
 
                 } else {
-
                     pantryQuantities.put(key, normalizedQuantity);
                     pantryUnits.put(key, dimension);
                 }
             }
-
         } finally {
             pantryCursor.close();
         }
 
-
-        // Check each recipe against the pantry
         List<Recipe> allRecipes = getAllRecipes();
+
+        android.util.Log.d("RECIPE_DEBUG",
+                "Total recipes loaded: " + allRecipes.size());
 
         for (Recipe recipe : allRecipes) {
 
             boolean canPrepare = true;
+            String reason = "All required ingredients available";
 
-            Cursor requiredCursor =
-                    getRecipeIngredients(recipe.getId());
+            Cursor requiredCursor = getRecipeIngredients(recipe.getId());
 
             try {
-
                 while (requiredCursor.moveToNext()) {
 
                     String requiredName = requiredCursor.getString(
-                            requiredCursor.getColumnIndexOrThrow(
-                                    COL_REQUIRED_NAME
-                            )
+                            requiredCursor.getColumnIndexOrThrow(COL_REQUIRED_NAME)
                     );
 
                     double requiredQuantity = requiredCursor.getDouble(
-                            requiredCursor.getColumnIndexOrThrow(
-                                    COL_REQUIRED_QUANTITY
-                            )
+                            requiredCursor.getColumnIndexOrThrow(COL_REQUIRED_QUANTITY)
                     );
 
                     String requiredUnit = requiredCursor.getString(
-                            requiredCursor.getColumnIndexOrThrow(
-                                    COL_REQUIRED_UNIT
-                            )
+                            requiredCursor.getColumnIndexOrThrow(COL_REQUIRED_UNIT)
                     );
 
                     String key = normalizeName(requiredName);
-
                     String requiredDimension = getDimension(requiredUnit);
 
-                    // Unsupported or incompatible units cannot match
-                    if (requiredDimension == null ||
-                            !pantryUnits.containsKey(key) ||
-                            !pantryUnits.get(key).equals(requiredDimension)) {
-
+                    if (requiredDimension == null) {
                         canPrepare = false;
+                        reason = "Unsupported recipe unit: " + requiredUnit;
+                        break;
+                    }
+
+                    if (!pantryUnits.containsKey(key)) {
+                        canPrepare = false;
+                        reason = "Missing ingredient: " + requiredName;
+                        break;
+                    }
+
+                    if (!pantryUnits.get(key).equals(requiredDimension)) {
+                        canPrepare = false;
+                        reason = "Incompatible unit for: " + requiredName;
                         break;
                     }
 
                     double normalizedRequired =
-                            convertToBaseUnit(
-                                    requiredQuantity,
-                                    requiredUnit
-                            );
+                            convertToBaseUnit(requiredQuantity, requiredUnit);
 
                     double available = pantryQuantities.get(key);
 
-                    // Allow a tiny tolerance for floating-point calculations
                     if (available + 0.000001 < normalizedRequired) {
-
                         canPrepare = false;
+                        reason = "Insufficient " + requiredName
+                                + ": need " + requiredQuantity + " "
+                                + requiredUnit + ", available quantity in base units: "
+                                + available;
                         break;
                     }
                 }
-
             } finally {
                 requiredCursor.close();
             }
+
+            android.util.Log.d("RECIPE_DEBUG",
+                    recipe.getName() + " | Match: " + canPrepare
+                            + " | Reason: " + reason);
 
             if (canPrepare) {
                 suggestions.add(recipe);
             }
         }
 
+        android.util.Log.d("RECIPE_DEBUG",
+                "Total suggested recipes: " + suggestions.size());
+
         return suggestions;
     }
+
 
 
     // Normalize names so "Flour" and "flour" match
