@@ -162,7 +162,6 @@ public class SettingsActivity extends AppCompatActivity {
         ).show();
     }
 
-
     // Bottom navigation methods.
 
     public void openHome(View view) {
