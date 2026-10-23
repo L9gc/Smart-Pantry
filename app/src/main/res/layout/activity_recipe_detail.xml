@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F7F2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="22dp">
+
+            <!-- Back button -->
+            <TextView
+                android:id="@+id/btnBackToRecipes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="←  Back to recipes"
+                android:textColor="#246B52"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Section label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="YOUR NEXT MEAL"
+                android:textColor="#39856A"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.08" />
+
+            <!-- Recipe title -->
+            <TextView
+                android:id="@+id/txtDetailRecipeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Recipe name"
+                android:textColor="#20352D"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <!-- Preparation time -->
+            <TextView
+                android:id="@+id/txtDetailRecipeTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="#C8E8D6"
+                android:text="15 minutes"
+                android:textColor="#246B52"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Description card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:background="#246B52"
+                android:elevation="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ABOUT THIS RECIPE"
+                    android:textColor="#C8E8D6"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08" />
+
+                <TextView
+                    android:id="@+id/txtDetailRecipeDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Recipe description"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="4dp" />
+
+            </LinearLayout>
+
+            <!-- Ingredients heading -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Ingredients"
+                android:textColor="#20352D"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Everything you need to prepare this meal."
+                android:textColor="#68766E"
+                android:textSize="14sp" />
+
+            <!-- Ingredients list -->
+            <LinearLayout
+                android:id="@+id/layoutRecipeIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="vertical" />
+
+            <!-- Instructions heading -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Cooking instructions"
+                android:textColor="#20352D"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Follow these steps to prepare your meal."
+                android:textColor="#68766E"
+                android:textSize="14sp" />
+
+            <!-- Recipe instructions -->
+            <TextView
+                android:id="@+id/txtDetailRecipeInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:padding="20dp"
+                android:background="#FFFFFF"
+                android:text="Cooking instructions will appear here."
+                android:textColor="#20352D"
+                android:textSize="15sp"
+                android:lineSpacingExtra="8dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Bottom navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#FFFFFF"
+        android:elevation="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="⌂\nHome"
+            android:textColor="#849188"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openHome" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="▤\nPantry"
+            android:textColor="#849188"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openPantry" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="⚙\nRecipes"
+            android:textColor="#246B52"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openRecipes" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="⚙\nSettings"
+            android:textColor="#849188"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openSettings" />
+
+    </LinearLayout>
+
+</LinearLayout>
