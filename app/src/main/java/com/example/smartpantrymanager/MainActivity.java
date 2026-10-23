@@ -10,19 +10,20 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnPantry;
     private Button btnRecipes;
-    private Button btnSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Connect Java variables to the buttons in activity_main.xml
+        // Set up bottom navigation
+        BottomNavigationHelper.setup(this);
+
+        // Connect dashboard buttons
         btnPantry = findViewById(R.id.btnPantry);
         btnRecipes = findViewById(R.id.btnRecipes);
-        btnSettings = findViewById(R.id.btnSettings);
 
-        // Navigate to the Pantry screen
+        // Open Pantry
         btnPantry.setOnClickListener(v -> {
             Intent intent = new Intent(
                     MainActivity.this,
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Navigate to the Suggested Recipes screen
+        // Open Suggested Recipes
         btnRecipes.setOnClickListener(v -> {
             Intent intent = new Intent(
                     MainActivity.this,
@@ -39,15 +40,6 @@ public class MainActivity extends AppCompatActivity {
             );
             startActivity(intent);
         });
-
-        // Navigate to the Settings screen
-        btnSettings.setOnClickListener(v -> {
-            Intent intent = new Intent(
-                    MainActivity.this,
-                    SettingsActivity.class
-            );
-            startActivity(intent);
-        });
     }
-
 }
+

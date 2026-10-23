@@ -7,7 +7,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.ImageButton;
+import android.app.DatePickerDialog;
+import java.util.Calendar;
+import java.util.Locale;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class IngredientFormActivity extends AppCompatActivity {
@@ -35,11 +38,37 @@ public class IngredientFormActivity extends AppCompatActivity {
             "millilitres",
             "litres"
     };
+    private void showDatePicker() {
+        Calendar calendar = Calendar.getInstance();
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, year, month, dayOfMonth) -> {
+                    String selectedDate = String.format(
+                            Locale.US,
+                            "%04d-%02d-%02d",
+                            year,
+                            month + 1,
+                            dayOfMonth
+                    );
+
+                    edtExpiry.setText(selectedDate);
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+
+        datePickerDialog.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredient_form);
+
+        ImageButton btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
 
         databaseHelper = new PantryDatabaseHelper(this);
 
@@ -48,6 +77,11 @@ public class IngredientFormActivity extends AppCompatActivity {
         edtName = findViewById(R.id.edtIngredientName);
         edtQuantity = findViewById(R.id.edtIngredientQuantity);
         edtExpiry = findViewById(R.id.edtIngredientExpiry);
+
+        edtExpiry.setFocusable(false);
+        edtExpiry.setClickable(true);
+
+        edtExpiry.setOnClickListener(v -> showDatePicker());
 
         spinnerUnit = findViewById(R.id.spinnerIngredientUnit);
 
@@ -66,7 +100,9 @@ public class IngredientFormActivity extends AppCompatActivity {
 
         spinnerUnit.setAdapter(unitAdapter);
 
+        // Load existing ingredient information when editing
         if (getIntent().hasExtra(EXTRA_ID)) {
+
             ingredientId = getIntent().getIntExtra(EXTRA_ID, -1);
 
             txtTitle.setText("Edit Ingredient");
@@ -87,9 +123,11 @@ public class IngredientFormActivity extends AppCompatActivity {
                             : String.valueOf(quantity)
             );
 
-            edtExpiry.setText(
-                    getIntent().getStringExtra(EXTRA_EXPIRY)
-            );
+            String expiryDate = getIntent().getStringExtra(EXTRA_EXPIRY);
+
+            if (expiryDate != null) {
+                edtExpiry.setText(expiryDate);
+            }
 
             String existingUnit = getIntent().getStringExtra(EXTRA_UNIT);
 
@@ -114,12 +152,14 @@ public class IngredientFormActivity extends AppCompatActivity {
         String quantityText = edtQuantity.getText().toString().trim();
         String expiryDate = edtExpiry.getText().toString().trim();
 
+        // Validate ingredient name
         if (name.isEmpty()) {
             edtName.setError("Enter an ingredient name");
             edtName.requestFocus();
             return;
         }
 
+        // Validate quantity input
         if (quantityText.isEmpty()) {
             edtQuantity.setError("Enter a quantity");
             edtQuantity.requestFocus();
@@ -136,54 +176,75 @@ public class IngredientFormActivity extends AppCompatActivity {
             return;
         }
 
-        if (quantity <= 0 || Double.isInfinite(quantity)
+        // Prevent zero, negative, NaN and infinite quantities
+        if (quantity <= 0
+                || Double.isInfinite(quantity)
                 || Double.isNaN(quantity)) {
-            edtQuantity.setError("Quantity must be greater than zero");
+
+            edtQuantity.setError(
+                    "Quantity must be greater than zero"
+            );
+
             edtQuantity.requestFocus();
             return;
         }
 
         String unit = spinnerUnit.getSelectedItem().toString();
 
+        boolean success;
+
+        // Insert a new ingredient or update an existing one
         if (ingredientId == -1) {
 
-            databaseHelper.addIngredient(
+            success = databaseHelper.addIngredient(
                     name,
                     quantity,
                     unit,
                     expiryDate
             );
 
-            Toast.makeText(
-                    this,
-                    "Ingredient added successfully",
-                    Toast.LENGTH_SHORT
-            ).show();
-
         } else {
 
-            databaseHelper.updateIngredient(
+            success = databaseHelper.updateIngredient(
                     ingredientId,
                     name,
                     quantity,
                     unit,
                     expiryDate
             );
+        }
+
+        // Only display success when the database operation succeeds
+        if (success) {
+
+            String message = ingredientId == -1
+                    ? "Ingredient added successfully"
+                    : "Ingredient updated successfully";
 
             Toast.makeText(
                     this,
-                    "Ingredient updated successfully",
+                    message,
                     Toast.LENGTH_SHORT
             ).show();
-        }
 
-        finish();
+            finish();
+
+        } else {
+
+            Toast.makeText(
+                    this,
+                    "Unable to save ingredient. Please try again.",
+                    Toast.LENGTH_LONG
+            ).show();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        databaseHelper.close();
-    }
 
+        if (databaseHelper != null) {
+            databaseHelper.close();
+        }
+    }
 }

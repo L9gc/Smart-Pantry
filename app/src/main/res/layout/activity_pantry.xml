@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F7F2">
+    android:background="#FFF8F1">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,11 +19,13 @@
             android:orientation="vertical"
             android:padding="22dp">
 
+            <!-- Header -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="YOUR KITCHEN"
-                android:textColor="#39856A"
+                android:textColor="#D97745"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.15" />
@@ -32,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="My Pantry"
-                android:textColor="#20352D"
+                android:textColor="#3D3029"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp" />
@@ -41,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Everything you have, all in one place."
-                android:textColor="#68766E"
+                android:textColor="#87766B"
                 android:textSize="15sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginTop="8dp" />
@@ -52,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#246B52"
+                android:background="#B95735"
                 android:padding="22dp"
                 android:layout_marginTop="26dp"
                 android:elevation="4dp">
@@ -61,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="INGREDIENT MANAGEMENT"
-                    android:textColor="#C8E8D6"
+                    android:textColor="#FFE2D1"
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.08" />
@@ -79,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Track quantities, manage expiry dates and keep your kitchen organized."
-                    android:textColor="#E1F0E7"
+                    android:textColor="#FFF0E7"
                     android:textSize="14sp"
                     android:lineSpacingExtra="3dp"
                     android:layout_marginTop="8dp" />
@@ -89,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="+  Add ingredient"
-                    android:textColor="#245B46"
+                    android:textColor="#8E432B"
                     android:backgroundTint="#FFFFFF"
                     android:layout_marginTop="18dp" />
 
@@ -101,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Your ingredients"
-                android:textColor="#20352D"
+                android:textColor="#3D3029"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 android:layout_marginTop="30dp"
@@ -111,9 +113,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Review and update what's in your pantry."
-                android:textColor="#68766E"
+                android:textColor="#87766B"
                 android:textSize="14sp"
                 android:layout_marginBottom="14dp" />
+
+            <!-- Empty pantry message -->
 
             <TextView
                 android:id="@+id/txtEmptyPantry"
@@ -122,65 +126,98 @@
                 android:background="#FFFFFF"
                 android:padding="24dp"
                 android:gravity="center"
-                android:text="Your pantry is waiting.&#10;Add your first ingredient to get started."
-                android:textColor="#68766E"
+                android:text="Your pantry is waiting.\nAdd your first ingredient to get started."
+                android:textColor="#87766B"
                 android:textSize="15sp"
                 android:lineSpacingExtra="4dp"
                 android:visibility="gone" />
+
+            <!-- Ingredient list -->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerPantry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
+                android:nestedScrollingEnabled="false"
+                android:clipToPadding="false"
+                android:paddingBottom="12dp" />
 
         </LinearLayout>
 
     </ScrollView>
 
-    <!-- Bottom navigation -->
+    <!-- Bottom navigation: four destinations -->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="68dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:background="#FFFFFF"
-        android:elevation="8dp">
+        android:elevation="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <!-- Home -->
 
         <TextView
+            android:id="@+id/navHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="⌂&#10;Home"
-            android:textColor="#68766E"
-            android:textSize="13sp"
+            android:text="⌂\nHome"
+            android:textColor="#87766B"
+            android:textSize="12sp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="openHome" />
+            android:background="?android:attr/selectableItemBackground" />
+
+        <!-- Pantry: selected -->
 
         <TextView
+            android:id="@+id/navPantry"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="▤&#10;Pantry"
-            android:textColor="#246B52"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="⚙&#10;Settings"
-            android:textColor="#68766E"
-            android:textSize="13sp"
+            android:text="▤\nPantry"
+            android:textColor="#D97745"
+            android:textSize="12sp"
+            android:textStyle="bold"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="openSettings" />
+            android:background="?android:attr/selectableItemBackground" />
+
+        <!-- Recipes -->
+
+        <TextView
+            android:id="@+id/navRecipes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="♡\nRecipes"
+            android:textColor="#87766B"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground" />
+
+        <!-- Settings -->
+
+        <TextView
+            android:id="@+id/navSettings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="⚙\nSettings"
+            android:textColor="#87766B"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground" />
 
     </LinearLayout>
 

@@ -2,64 +2,87 @@
 
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    android:backgroundTint="#FFFFFF"
-    android:elevation="4dp">
+    android:layout_marginBottom="14dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="18dp">
 
+        <!-- Ingredient name -->
         <TextView
             android:id="@+id/txtIngredientName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ingredient name"
-            android:textColor="#263238"
-            android:textSize="18sp"
+            android:textColor="#3D3029"
+            android:textSize="19sp"
             android:textStyle="bold" />
 
+        <!-- Quantity -->
         <TextView
             android:id="@+id/txtIngredientQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="8dp"
             android:text="Quantity: 200 grams"
-            android:textColor="#546E7A"
+            android:textColor="#87766B"
             android:textSize="14sp" />
 
+        <!-- Expiry date -->
         <TextView
             android:id="@+id/txtIngredientExpiry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="5dp"
             android:text="Expiry date: Not specified"
-            android:textColor="#546E7A"
+            android:textColor="#87766B"
             android:textSize="14sp" />
 
+        <!-- Action buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="end"
+            android:layout_marginTop="18dp"
+            android:gravity="end|center_vertical"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnEditIngredient"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit" />
+                android:layout_height="44dp"
+                android:minWidth="88dp"
+                android:backgroundTint="#F6D7C3"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:text="Edit"
+                android:textAllCaps="false"
+                android:textColor="#8E432B"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnDeleteIngredient"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Delete" />
+                android:layout_height="44dp"
+                android:layout_marginStart="10dp"
+                android:minWidth="88dp"
+                android:backgroundTint="#D97745"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:text="Delete"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

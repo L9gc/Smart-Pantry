@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F7F2">
+    android:background="#FFF8F1">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,13 +19,13 @@
             android:orientation="vertical"
             android:padding="22dp">
 
-            <!-- Welcome header -->
+            <!-- Header -->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SMART PANTRY"
-                android:textColor="#39856A"
+                android:textColor="#D97745"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.15" />
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Good food starts here."
-                android:textColor="#20352D"
+                android:textColor="#3D3029"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp" />
@@ -42,19 +42,19 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Keep track of your ingredients and discover your next meal."
-                android:textColor="#68766E"
+                android:text="A little planning goes a long way. Let's make something good."
+                android:textColor="#87766B"
                 android:textSize="15sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginTop="8dp" />
 
-            <!-- Featured card -->
+            <!-- Featured recipe card -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#246B52"
+                android:background="#B95735"
                 android:padding="22dp"
                 android:layout_marginTop="26dp"
                 android:elevation="4dp">
@@ -62,8 +62,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="YOUR KITCHEN, ORGANIZED"
-                    android:textColor="#C8E8D6"
+                    android:text="FROM PANTRY TO PLATE"
+                    android:textColor="#FFE2D1"
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.08" />
@@ -71,7 +71,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Make every ingredient count."
+                    android:text="What's cooking today?"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -80,31 +80,32 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Find recipes that match what you have available, including the quantities you need."
-                    android:textColor="#E1F0E7"
+                    android:text="Discover recipes that match the ingredients and quantities you already have."
+                    android:textColor="#FFF0E7"
                     android:textSize="14sp"
                     android:lineSpacingExtra="3dp"
                     android:layout_marginTop="8dp" />
 
                 <Button
                     android:id="@+id/btnRecipes"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Explore recipes  →"
-                    android:textColor="#245B46"
+                    android:textAllCaps="false"
+                    android:textColor="#8E432B"
                     android:backgroundTint="#FFFFFF"
                     android:layout_marginTop="18dp" />
 
             </LinearLayout>
 
-            <!-- Features heading -->
+            <!-- Quick access heading -->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Explore your pantry"
-                android:textColor="#20352D"
-                android:textSize="21sp"
+                android:text="Your kitchen"
+                android:textColor="#3D3029"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="14dp" />
@@ -123,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="01  |  INGREDIENTS"
-                    android:textColor="#39856A"
+                    android:textColor="#D97745"
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.08" />
@@ -131,9 +132,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="My Pantry"
-                    android:textColor="#20352D"
-                    android:textSize="20sp"
+                    android:text="Your Pantry"
+                    android:textColor="#3D3029"
+                    android:textSize="19sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp" />
 
@@ -141,7 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Add ingredients, update quantities and keep track of expiry dates."
-                    android:textColor="#68766E"
+                    android:textColor="#87766B"
                     android:textSize="14sp"
                     android:lineSpacingExtra="3dp"
                     android:layout_marginTop="5dp" />
@@ -151,54 +152,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Manage ingredients"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#D97745"
                     android:layout_marginTop="12dp" />
 
             </LinearLayout>
 
-            <!-- Settings card -->
+            <!-- Helpful reminder -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#FFFFFF"
+                android:background="#F6D7C3"
                 android:padding="18dp"
-                android:elevation="2dp"
                 android:layout_marginTop="14dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="02  |  PREFERENCES"
-                    android:textColor="#39856A"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.08" />
+                    android:text="🍑  A little kitchen wisdom"
+                    android:textColor="#8E432B"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Settings"
-                    android:textColor="#20352D"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="8dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Personalize your experience and manage app preferences."
-                    android:textColor="#68766E"
+                    android:text="Use what you have, plan what you need, and waste a little less."
+                    android:textColor="#694638"
                     android:textSize="14sp"
-                    android:lineSpacingExtra="3dp"
-                    android:layout_marginTop="5dp" />
-
-                <Button
-                    android:id="@+id/btnSettings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Open settings"
-                    android:layout_marginTop="12dp" />
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginTop="6dp" />
 
             </LinearLayout>
 
@@ -208,7 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="PLAN SMARTER  •  COOK BETTER  •  WASTE LESS"
-                android:textColor="#849188"
+                android:textColor="#A18F82"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -224,45 +210,74 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="68dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:background="#FFFFFF"
-        android:elevation="8dp">
+        android:elevation="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <!-- Home: selected -->
 
         <TextView
+            android:id="@+id/navHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="⌂\nHome"
-            android:textColor="#246B52"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textColor="#D97745"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground" />
+
+        <!-- Pantry -->
 
         <TextView
+            android:id="@+id/navPantry"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="▤\nPantry"
-            android:textColor="#68766E"
-            android:textSize="13sp"
+            android:textColor="#87766B"
+            android:textSize="12sp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="openPantry" />
+            android:background="?android:attr/selectableItemBackground" />
+
+        <!-- Recipes -->
 
         <TextView
+            android:id="@+id/navRecipes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="♡\nRecipes"
+            android:textColor="#87766B"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground" />
+
+        <!-- Settings -->
+
+        <TextView
+            android:id="@+id/navSettings"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="⚙\nSettings"
-            android:textColor="#68766E"
-            android:textSize="13sp"
+            android:textColor="#87766B"
+            android:textSize="12sp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="openSettings" />
+            android:background="?android:attr/selectableItemBackground" />
 
     </LinearLayout>
 

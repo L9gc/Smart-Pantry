@@ -69,6 +69,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_settings);
 
+        BottomNavigationHelper.setup(this);
+
         // Connect the XML views.
         expiryAlertsSwitch = findViewById(R.id.expiryAlertsSwitch);
         btnClearPantry = findViewById(R.id.btnClearPantry);

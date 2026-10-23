@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F7F2">
+    android:background="#FFF8F1">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,11 +19,13 @@
             android:orientation="vertical"
             android:padding="22dp">
 
+            <!-- Header -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MAKE SOMETHING GOOD"
-                android:textColor="#39856A"
+                android:textColor="#D97745"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.08" />
@@ -32,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Suggested Recipes"
-                android:textColor="#20352D"
+                android:textColor="#3D3029"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -41,9 +44,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Discover meals you can make with the ingredients already in your pantry."
-                android:textColor="#68766E"
+                android:textColor="#87766B"
                 android:textSize="15sp"
                 android:lineSpacingExtra="4dp" />
+
+            <!-- Featured card -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,14 +56,14 @@
                 android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 android:padding="20dp"
-                android:background="#246B52"
+                android:background="#B95735"
                 android:elevation="3dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="COOK WITH CONFIDENCE"
-                    android:textColor="#C8E8D6"
+                    android:textColor="#FFE2D1"
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.08" />
@@ -76,19 +81,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Only recipes with all their required ingredients and quantities available in your pantry should appear here."
-                    android:textColor="#E1F0E7"
+                    android:text="Discover recipes that match your available ingredients and quantities."
+                    android:textColor="#FFF0E7"
                     android:textSize="14sp"
                     android:lineSpacingExtra="3dp" />
 
             </LinearLayout>
+
+            <!-- Recipe list heading -->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:text="Ready to cook"
-                android:textColor="#20352D"
+                android:textColor="#3D3029"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -98,8 +105,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="16dp"
                 android:text="Recipes matched to your current ingredients."
-                android:textColor="#68766E"
+                android:textColor="#87766B"
                 android:textSize="14sp" />
+
+            <!-- Empty state -->
 
             <TextView
                 android:id="@+id/txtEmptyRecipes"
@@ -109,16 +118,20 @@
                 android:background="#FFFFFF"
                 android:gravity="center"
                 android:text="No matching recipes yet.\n\nAdd more ingredients to your pantry to discover meals you can make."
-                android:textColor="#68766E"
+                android:textColor="#87766B"
                 android:textSize="15sp"
                 android:lineSpacingExtra="4dp"
                 android:visibility="gone" />
+
+            <!-- Recipes RecyclerView -->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerRecipes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
+                android:nestedScrollingEnabled="false"
+                android:clipToPadding="false"
+                android:paddingBottom="12dp" />
 
         </LinearLayout>
 
@@ -128,57 +141,74 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="68dp"
         android:orientation="horizontal"
         android:background="#FFFFFF"
         android:elevation="8dp"
-        android:gravity="center_vertical">
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <!-- Home -->
 
         <TextView
+            android:id="@+id/navHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="⌂\nHome"
-            android:textColor="#849188"
+            android:textColor="#87766B"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="openHome" />
+            android:background="?android:attr/selectableItemBackground" />
+
+        <!-- Pantry -->
 
         <TextView
+            android:id="@+id/navPantry"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="▤\nPantry"
-            android:textColor="#849188"
+            android:textColor="#87766B"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="openPantry" />
+            android:background="?android:attr/selectableItemBackground" />
+
+        <!-- Recipes: selected -->
 
         <TextView
+            android:id="@+id/navRecipes"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="⚙\nRecipes"
-            android:textColor="#246B52"
+            android:text="♡\nRecipes"
+            android:textColor="#D97745"
             android:textStyle="bold"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground" />
+
+        <!-- Settings -->
 
         <TextView
+            android:id="@+id/navSettings"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="⚙\nSettings"
-            android:textColor="#849188"
+            android:textColor="#87766B"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="openSettings" />
+            android:background="?android:attr/selectableItemBackground" />
 
     </LinearLayout>
 

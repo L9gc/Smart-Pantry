@@ -26,6 +26,8 @@ public class SuggestedRecipesActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggested_recipes);
 
+        BottomNavigationHelper.setup(this);
+
         recyclerRecipes = findViewById(R.id.recyclerRecipes);
         txtEmptyRecipes = findViewById(R.id.txtEmptyRecipes);
 

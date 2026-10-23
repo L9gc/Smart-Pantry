@@ -31,6 +31,8 @@ public class PantryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantry);
 
+        BottomNavigationHelper.setup(this);
+
         databaseHelper = new PantryDatabaseHelper(this);
 
         recyclerPantry = findViewById(R.id.recyclerPantry);

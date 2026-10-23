@@ -1,103 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F7F6"
+    android:background="#FFF8F1"
     android:fillViewport="true">
 
-    ```
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp">
 
-        <TextView
-            android:id="@+id/txtFormTitle"
+        <!-- Header with back icon and page title -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Ingredient"
-            android:textColor="#263238"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_back"
+                android:contentDescription="Go back"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                app:tint="#8E432B" />
+
+            <TextView
+                android:id="@+id/txtFormTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:text="Add Ingredient"
+                android:textColor="#3D3029"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Ingredient name"
-            android:textColor="#263238"
-            android:textStyle="bold" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:text="Keep your pantry organised by tracking your ingredients and their expiry dates."
+            android:textColor="#87766B"
+            android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/edtIngredientName"
+        <!-- Form card -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g. Flour"
-            android:inputType="textCapSentences"
-            android:singleLine="true" />
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="#FFFFFF"
+            android:elevation="3dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Quantity"
-            android:textColor="#263238"
-            android:textStyle="bold" />
+            <!-- Ingredient name -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingredient name"
+                android:textColor="#3D3029"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtIngredientQuantity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="e.g. 500"
-            android:inputType="numberDecimal"
-            android:singleLine="true" />
+            <EditText
+                android:id="@+id/edtIngredientName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="#D97745"
+                android:hint="e.g. Flour"
+                android:inputType="textCapSentences"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="#3D3029"
+                android:textColorHint="#A99A90" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Unit"
-            android:textColor="#263238"
-            android:textStyle="bold" />
+            <!-- Quantity -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Quantity"
+                android:textColor="#3D3029"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-        <Spinner
-            android:id="@+id/spinnerIngredientUnit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp" />
+            <EditText
+                android:id="@+id/edtIngredientQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="#D97745"
+                android:hint="e.g. 500"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="#3D3029"
+                android:textColorHint="#A99A90" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Expiry date (optional)"
-            android:textColor="#263238"
-            android:textStyle="bold" />
+            <!-- Unit -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Measurement unit"
+                android:textColor="#3D3029"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtIngredientExpiry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="YYYY-MM-DD"
-            android:inputType="date"
-            android:singleLine="true" />
+            <Spinner
+                android:id="@+id/spinnerIngredientUnit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="#D97745"
+                android:minHeight="48dp"
+                android:padding="8dp" />
 
+            <!-- Expiry date -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Expiry date (optional)"
+                android:textColor="#3D3029"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtIngredientExpiry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="#D97745"
+                android:hint="YYYY-MM-DD"
+                android:inputType="date"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="#3D3029"
+                android:textColorHint="#A99A90" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Leave blank if the expiry date is unknown."
+                android:textColor="#87766B"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- Action buttons -->
         <Button
             android:id="@+id/btnSaveIngredient"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_marginTop="28dp"
-            android:text="Save Ingredient" />
+            android:backgroundTint="#D97745"
+            android:text="Save Ingredient"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnCancelIngredient"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cancel" />
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#F6D7C3"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="#8E432B"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
 </ScrollView>
+
