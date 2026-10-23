@@ -483,9 +483,38 @@ public class PantryDatabaseHelper extends SQLiteOpenHelper {
 
     // Normalize names so "Flour" and "flour" match
     private String normalizeName(String name) {
+        String normalized = name.trim().toLowerCase(Locale.ROOT);
 
-        return name.trim().toLowerCase(Locale.ROOT);
+        // Convert common "-ies" plurals to "-y".
+        if (normalized.endsWith("ies") && normalized.length() > 4) {
+            return normalized.substring(0, normalized.length() - 3) + "y";
+        }
+
+        // Handle common plurals such as dishes, boxes and glasses.
+        if ((normalized.endsWith("ches")
+                || normalized.endsWith("shes")
+                || normalized.endsWith("sses")
+                || normalized.endsWith("xes")
+                || normalized.endsWith("zes"))
+                && normalized.length() > 4) {
+            return normalized.substring(0, normalized.length() - 2);
+        }
+
+        // Handle tomatoes and potatoes.
+        if (normalized.endsWith("oes") && normalized.length() > 4) {
+            return normalized.substring(0, normalized.length() - 2);
+        }
+
+        // Handle most other regular plurals.
+        if (normalized.endsWith("s")
+                && !normalized.endsWith("ss")
+                && normalized.length() > 3) {
+            return normalized.substring(0, normalized.length() - 1);
+        }
+
+        return normalized;
     }
+
 
 
     // Determine which measurement category a unit belongs to
